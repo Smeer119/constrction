@@ -161,18 +161,18 @@ export default function WorkerAttendancePage() {
         title: "Success",
         description: "Worker added successfully",
       });
-    } catch (error) {
-      console.error("Error adding worker:", error);
-      toast({
-        title: "Error",
-        description: error.message || "Failed to add worker",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
+} catch (error) {
+  console.error("Error adding worker:", error);
 
+  const err = error as { message?: string }; // type assertion
+
+  toast({
+    title: "Error",
+    description: err.message || "Failed to add worker",
+    variant: "destructive",
+  });
+}
+  }
   // Delete worker from database
   const deleteWorker = async (workerId: string) => {
     try {
